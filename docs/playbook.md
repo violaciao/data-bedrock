@@ -15,7 +15,7 @@ A step-by-step guide to running the full toolkit end to end, from a fresh clone 
 ## Step 1 — Set up the environment
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/violaciao/data-bedrock.git
 cd data-bedrock
 
 python -m venv .venv
