@@ -1,0 +1,13 @@
+funnel_name,step_order,step_name,event_type
+activation_funnel,1,Page View,page_view
+activation_funnel,2,Signup,signup
+activation_funnel,3,First Feature Use,feature_used
+activation_funnel,4,Report Created,report_created
+conversion_funnel,1,Signup,signup
+conversion_funnel,2,Feature Used,feature_used
+conversion_funnel,3,Invite Sent,invite_sent
+conversion_funnel,4,Upgrade Clicked,upgrade_clicked
+engagement_funnel,1,Login,login
+engagement_funnel,2,Dashboard Viewed,dashboard_viewed
+engagement_funnel,3,Report Created,report_created
+engagement_funnel,4,Export Downloaded,export_downloaded

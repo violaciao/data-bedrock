@@ -1,0 +1,37 @@
+data_bedrock:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: "{{ env_var('GCP_DATASET', 'analytics_dev') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      threads: 4
+      timeout_seconds: 300
+
+    prod:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: "{{ env_var('GCP_DATASET', 'analytics') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: US
+      threads: 8
+      timeout_seconds: 600
+
+# Snowflake alternative (uncomment and adjust):
+# data_bedrock:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: snowflake
+#       account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+#       user: "{{ env_var('SNOWFLAKE_USER') }}"
+#       password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+#       role: TRANSFORMER
+#       database: ANALYTICS
+#       warehouse: TRANSFORMING
+#       schema: DEV
+#       threads: 4

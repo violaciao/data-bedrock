@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: mart_mrr
+    description: >
+      Monthly MRR movements. One row per (user, billing_month) with MRR type
+      classification (new, expansion, contraction, churned, renewal).
+
+      Roll up by billing_month and mrr_type to get the classic MRR waterfall chart.
+
+    columns:
+      - name: billing_month
+        description: First day of the billing month.
+        tests:
+          - not_null
+
+      - name: user_id
+        description: FK to stg_users.
+        tests:
+          - not_null
+
+      - name: mrr_type
+        description: >
+          MRR movement category: new_mrr | expansion_mrr | contraction_mrr |
+          renewal_mrr | churned_mrr.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [new_mrr, expansion_mrr, contraction_mrr, renewal_mrr, churned_mrr]
+
+      - name: amount_usd
+        description: MRR amount. Negative for churned_mrr rows.
+
+      - name: mrr_delta
+        description: Net change in MRR vs prior month for this user.

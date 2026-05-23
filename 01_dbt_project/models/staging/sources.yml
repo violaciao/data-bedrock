@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw tables loaded from the data ingestion pipeline (Fivetran / Airbyte / custom).
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: raw
+
+    tables:
+      - name: users
+        description: Raw user records from the application database.
+        loaded_at_field: signup_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
+
+      - name: events
+        description: Raw behavioural event stream.
+        loaded_at_field: occurred_at
+        freshness:
+          warn_after: {count: 4, period: hour}
+          error_after: {count: 12, period: hour}
+
+      - name: orders
+        description: Raw subscription / payment events.
+        loaded_at_field: billed_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}

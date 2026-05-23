@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_user_spine
+    description: >
+      One row per (user, calendar week). Spans from the user's signup week to
+      the week before churn (or the current week for active users).
+      Use this as the base for any weekly retention or activity analysis.
+
+    columns:
+      - name: user_id
+        description: FK to stg_users.
+        tests:
+          - not_null
+
+      - name: cohort_week
+        description: Truncated-to-week timestamp of the user's signup.
+        tests:
+          - not_null
+
+      - name: week_start
+        description: The calendar week (Monday) for this row.
+        tests:
+          - not_null
+
+      - name: periods_since_signup
+        description: Integer number of weeks since the user signed up (0 = signup week).
+        tests:
+          - not_null

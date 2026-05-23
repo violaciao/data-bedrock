@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "events": [
+    {
+      "name": "page_view",
+      "description": "Fired on every page render.",
+      "properties": {
+        "page_name":   { "type": "string",  "required": true },
+        "referrer":    { "type": "string",  "required": false },
+        "utm_source":  { "type": "string",  "required": false },
+        "utm_medium":  { "type": "string",  "required": false },
+        "utm_campaign":{ "type": "string",  "required": false }
+      }
+    },
+    {
+      "name": "signup",
+      "description": "User completes account creation.",
+      "properties": {
+        "acquisition_channel": { "type": "string", "required": true, "enum": ["organic_search","paid_search","direct","referral","social","email"] },
+        "signup_method":       { "type": "string", "required": true, "enum": ["email","google","github"] },
+        "plan_at_signup":      { "type": "string", "required": true, "enum": ["free","starter","growth","enterprise"] }
+      }
+    },
+    {
+      "name": "login",
+      "properties": {
+        "login_method": { "type": "string", "required": true, "enum": ["email","google","github","sso"] }
+      }
+    },
+    {
+      "name": "feature_used",
+      "properties": {
+        "feature_name":     { "type": "string", "required": true },
+        "feature_category": { "type": "string", "required": false }
+      }
+    },
+    {
+      "name": "dashboard_viewed",
+      "properties": {
+        "dashboard_id":   { "type": "string", "required": true },
+        "dashboard_type": { "type": "string", "required": false, "enum": ["built_in","custom"] }
+      }
+    },
+    {
+      "name": "report_created",
+      "properties": {
+        "report_type":   { "type": "string",  "required": true, "enum": ["funnel","cohort","ab_test","custom"] },
+        "data_sources":  { "type": "array",   "required": false }
+      }
+    },
+    {
+      "name": "invite_sent",
+      "properties": {
+        "invite_role": { "type": "string", "required": true, "enum": ["viewer","editor","admin"] }
+      }
+    },
+    {
+      "name": "upgrade_clicked",
+      "properties": {
+        "cta_location": { "type": "string", "required": true },
+        "current_plan": { "type": "string", "required": true },
+        "target_plan":  { "type": "string", "required": false }
+      }
+    },
+    {
+      "name": "export_downloaded",
+      "properties": {
+        "export_format": { "type": "string", "required": true, "enum": ["csv","xlsx","png","pdf"] },
+        "export_type":   { "type": "string", "required": true, "enum": ["report","raw_data","chart"] }
+      }
+    },
+    {
+      "name": "settings_changed",
+      "properties": {
+        "setting_name": { "type": "string", "required": true }
+      }
+    }
+  ],
+  "identify_traits": {
+    "required": ["plan", "acquisition_channel", "signed_up_at", "country"],
+    "forbidden_pii": ["email", "name", "phone", "ip_address"]
+  }
+}

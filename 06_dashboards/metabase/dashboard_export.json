@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "note": "This is a template export. Import into Metabase 0.47+ via Settings → Admin → Import. Remap the database connection to your BigQuery instance after import.",
+  "dashboards": [
+    {
+      "name": "Growth Overview",
+      "description": "MRR waterfall, acquisition trends, and conversion funnel.",
+      "cards": [
+        {
+          "name": "MRR by Type",
+          "type": "bar",
+          "query": {
+            "source_table": "mart_mrr",
+            "aggregation": [["sum", ["field", "amount_usd"]]],
+            "breakout": [["field", "billing_month"], ["field", "mrr_type"]],
+            "order_by": [["asc", ["field", "billing_month"]]]
+          }
+        },
+        {
+          "name": "Monthly Signups by Channel",
+          "type": "bar",
+          "query": {
+            "source_table": "dim_users",
+            "aggregation": [["count", ["field", "user_id"]]],
+            "breakout": [
+              ["field", "signed_up_at", {"temporal-unit": "month"}],
+              ["field", "acquisition_channel"]
+            ]
+          }
+        },
+        {
+          "name": "Conversion Rate",
+          "type": "scalar",
+          "query": {
+            "source_table": "dim_users",
+            "aggregation": [
+              ["share", ["=", ["field", "is_converted"], true]]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Retention",
+      "description": "Weekly cohort retention heatmap and survival curves.",
+      "cards": [
+        {
+          "name": "Cohort Retention Heatmap",
+          "type": "pivot_table",
+          "query": {
+            "source_table": "mart_cohort_retention",
+            "aggregation": [["avg", ["field", "retention_rate"]]],
+            "breakout": [["field", "cohort_week"], ["field", "period_number"]],
+            "filter": ["<=", ["field", "period_number"], 12]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: stg_users
+    description: >
+      Cleaned users table. One row per user. Timestamps are cast, strings
+      are normalised, and column names follow the project snake_case convention.
+
+    columns:
+      - name: user_id
+        description: Unique user identifier (e.g. "user_00001").
+        tests:
+          - not_null
+          - unique
+
+      - name: signed_up_at
+        description: UTC timestamp of account creation.
+        tests:
+          - not_null
+
+      - name: acquisition_channel
+        description: >
+          Marketing channel that drove the signup. One of:
+          organic_search, paid_search, direct, referral, social, email.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [organic_search, paid_search, direct, referral, social, email]
+
+      - name: is_converted
+        description: True if the user ever subscribed to a paid plan.
+        tests:
+          - not_null
+
+      - name: plan
+        description: Current subscription plan. One of free / starter / growth / enterprise.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [free, starter, growth, enterprise]
+
+      - name: churned_at
+        description: UTC timestamp of churn. Null if the user is still active.
+
+      - name: country_code
+        description: ISO 3166-1 alpha-2 country code (upper-cased).

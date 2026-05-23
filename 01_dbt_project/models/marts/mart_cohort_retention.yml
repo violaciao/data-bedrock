@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: mart_cohort_retention
+    description: >
+      Weekly cohort retention matrix. Each row is a (cohort_week, period_number)
+      combination with the number and fraction of users still active at that period.
+
+      Feed this into your BI tool to produce a retention heatmap or survival curve.
+
+    columns:
+      - name: cohort_week
+        description: The week users first signed up (Monday of the week).
+        tests:
+          - not_null
+
+      - name: period_number
+        description: Weeks since signup. 0 = signup week, 1 = one week later, etc.
+        tests:
+          - not_null
+
+      - name: cohort_size
+        description: Total users in this cohort (denominator for retention_rate).
+        tests:
+          - not_null
+
+      - name: active_users
+        description: Users who had at least one qualifying event in this week.
+
+      - name: retention_rate
+        description: active_users / cohort_size. Null-safe (returns null if cohort_size = 0).

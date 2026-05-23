@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+pythonpath = [
+    ".",
+    "05_measurement",
+    "04_cohort_retention",
+    "03_growth_analysis",
+]
+testpaths = ["tests"]

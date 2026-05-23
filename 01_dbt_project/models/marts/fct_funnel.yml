@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_funnel
+    description: >
+      Funnel conversion rates, parameterized by seeds/funnel_config.csv.
+      One row per (funnel_name, step_order). Step definitions live in the seed,
+      not in this SQL, so new funnels require no SQL changes.
+
+    columns:
+      - name: funnel_name
+        description: Name of the funnel (e.g. "activation_funnel").
+        tests:
+          - not_null
+
+      - name: step_order
+        description: Integer ordering of steps within the funnel (1-based).
+        tests:
+          - not_null
+
+      - name: step_name
+        description: Human-readable step label.
+
+      - name: event_type
+        description: The event_type string that defines this step.
+
+      - name: users_reached
+        description: Number of users who completed this step in order.
+
+      - name: conversion_from_top
+        description: users_reached / top_of_funnel_users.
+
+      - name: conversion_from_previous
+        description: users_reached / users_reached_at_previous_step.

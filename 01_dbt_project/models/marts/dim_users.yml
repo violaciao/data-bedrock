@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: dim_users
+    description: >
+      Enriched user dimension. One row per user with signup metadata, current
+      subscription plan, churn flag, and lifetime activity summary.
+
+    columns:
+      - name: user_id
+        description: Unique user identifier.
+        tests:
+          - not_null
+          - unique
+
+      - name: signed_up_at
+        description: Account creation timestamp.
+        tests:
+          - not_null
+
+      - name: acquisition_channel
+        description: Marketing channel that drove the signup.
+        tests:
+          - not_null
+
+      - name: is_converted
+        description: True if the user ever subscribed to a paid plan.
+        tests:
+          - not_null
+
+      - name: plan
+        description: Current plan (free / starter / growth / enterprise).
+        tests:
+          - not_null
+
+      - name: is_churned
+        description: True if churned_at is populated.
+        tests:
+          - not_null
+
+      - name: is_paying
+        description: True if the current plan is starter or higher.
+
+      - name: lifetime_events
+        description: Total number of events ever recorded for this user.
+
+      - name: active_weeks
+        description: Number of distinct calendar weeks with at least one event.
+
+      - name: days_to_convert
+        description: Days from signup to first payment. Null for free users.

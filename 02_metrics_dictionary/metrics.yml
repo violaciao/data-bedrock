@@ -1,0 +1,58 @@
+version: 2
+
+metrics:
+  - name: signups
+    label: Signups
+    model: ref('dim_users')
+    description: New user accounts created in the period.
+    type: count
+    sql: user_id
+    timestamp: signed_up_at
+    time_grains: [day, week, month]
+    dimensions:
+      - acquisition_channel
+      - country_code
+      - plan
+
+  - name: conversion_rate
+    label: Conversion Rate
+    model: ref('dim_users')
+    description: Fraction of signups that converted to a paid plan.
+    type: ratio
+    numerator:
+      name: converted_users
+      sql: "case when is_converted then user_id end"
+      type: count
+    denominator:
+      name: total_signups
+      sql: user_id
+      type: count
+    timestamp: signed_up_at
+    time_grains: [week, month]
+    dimensions:
+      - acquisition_channel
+
+  - name: mrr
+    label: MRR
+    model: ref('mart_mrr')
+    description: Monthly Recurring Revenue.
+    type: sum
+    sql: amount_usd
+    timestamp: billing_month
+    time_grains: [month]
+    filters:
+      - field: mrr_type
+        operator: "!="
+        value: "'churned_mrr'"
+    dimensions:
+      - mrr_type
+      - plan
+
+  - name: churn_rate
+    label: Monthly Churn Rate
+    model: ref('mart_mrr')
+    description: Fraction of MRR lost to churn in the month.
+    type: derived
+    # Computed in BI layer: abs(churned_mrr) / prior_month_mrr
+    timestamp: billing_month
+    time_grains: [month]

@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: >
+      Cleaned orders table. Each row is one billing event: a new subscription,
+      a renewal, or a churn record.
+
+    columns:
+      - name: order_id
+        description: Unique order identifier.
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: FK to stg_users.user_id.
+        tests:
+          - not_null
+
+      - name: order_type
+        description: >
+          Type of billing event. One of: new_mrr, renewal, churn.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [new_mrr, renewal, churn]
+
+      - name: plan
+        description: Subscription plan at billing time.
+        tests:
+          - not_null
+
+      - name: amount_usd
+        description: Charge amount in USD. Zero for churn records.
+        tests:
+          - not_null
+
+      - name: billed_at
+        description: UTC timestamp of the billing event.
+        tests:
+          - not_null
+
+      - name: period_start
+        description: Start of the subscription period covered by this order.
+
+      - name: period_end
+        description: End of the subscription period covered by this order.
