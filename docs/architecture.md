@@ -48,18 +48,24 @@ Raw events (Segment / SDK)
 
 ## Module boundaries
 
-Each analysis module (`03_growth_analysis/`, `04_cohort_retention/`, `05_ab_testing/`) is self-contained:
+Each analysis module (`03_growth_analysis/`, `04_cohort_retention/`, `05_measurement/`) is self-contained:
 
 ```
 module/
 ├── README.md          instructions
-├── src/               reusable Python library
+├── <package>/         reusable Python library
 │   ├── __init__.py
 │   └── *.py
-└── *.ipynb            presentation notebooks (import from src/)
+└── *.ipynb            presentation notebooks (import from the package)
 ```
 
-**Rule:** Notebooks import from `src/`. `src/` never imports from notebooks.
+Examples:
+- `03_growth_analysis/growth_analysis/`
+- `04_cohort_retention/cohort_retention/`
+- `05_measurement/ab_testing/`
+- `05_measurement/causal_inference/`
+
+**Rule:** Notebooks import from the module package. Package code never imports from notebooks.
 **Rule:** No cross-module imports (e.g. `04_cohort_retention` must not import from `03_growth_analysis`).
 
 ## Testing strategy
@@ -68,7 +74,7 @@ module/
 |-------|-----------|-------|
 | dbt models | schema tests (not_null, unique, accepted_values) | `*.yml` |
 | dbt models | data tests (custom SQL assertions) | `tests/` in dbt project |
-| Python `src/` | unit tests | `tests/` at repo root |
+| Python packages | unit tests | `tests/` at repo root |
 | Notebooks | smoke test: Run All against synthetic data | manual / CI |
 
 All Python tests must run **offline** against `data/synthetic/` — never against a live warehouse.

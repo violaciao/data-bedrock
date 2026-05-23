@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 Verify:
 ```bash
-python -c "import pandas, scipy, sklearn, matplotlib; print('OK')"
+python -c "import pandas, scipy, sklearn, statsmodels, matplotlib; print('OK')"
 ```
 
 ---
@@ -141,7 +141,22 @@ What you will see:
 - Sample size calculator
 - Sequential test (mSPRT) — always-valid p-values
 
-For causal inference, use the library directly in a notebook or script:
+Then open the dedicated causal notebooks:
+
+```bash
+jupyter notebook 05_measurement/did_analysis.ipynb
+jupyter notebook 05_measurement/psm_analysis.ipynb
+jupyter notebook 05_measurement/synthetic_control_analysis.ipynb
+jupyter notebook 05_measurement/mmm_analysis.ipynb
+```
+
+What you will see:
+- `did_analysis.ipynb`: parallel trends checks, 2x2 DiD, panel DiD, event study, placebo test
+- `psm_analysis.ipynb`: overlap diagnostics, Love plot, balance checks, caliper sensitivity
+- `synthetic_control_analysis.ipynb`: donor weights, treated vs. synthetic path, placebo comparisons
+- `mmm_analysis.ipynb`: adstock and saturation transforms, channel contribution, response curves, budget optimization
+
+If you want to work from the library directly instead of the notebooks:
 
 ```python
 import sys; sys.path.insert(0, "05_measurement")
@@ -228,7 +243,7 @@ cat 06_dashboards/README.md
 ```
 Day 1   Steps 1–4         Environment, synthetic data, tests green
 Day 2   Steps 5–6         Explore growth and retention patterns on synthetic data
-Day 3   Step 7            Run experiment analysis; pick the causal methods relevant to your use cases
+Day 3   Step 7            Run experiment analysis and the causal walkthrough notebooks relevant to your use cases
 Day 4   Step 9            Adapt tracking plan and metrics dictionary to your product
 Day 5   Step 8            Connect dbt to your warehouse; run models on real data
 Day 6   Step 10           Stand up dashboards against mart tables

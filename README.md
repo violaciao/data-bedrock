@@ -41,6 +41,13 @@ This repository is built for that exact job.
 | `tests/` | Test coverage for core statistical and analytics modules |
 | `docs/` | Architecture notes, module guides, and decision logs |
 
+The measurement module now includes dedicated walkthrough notebooks for:
+- A/B testing and sequential testing
+- Difference-in-Differences
+- Propensity Score Matching
+- Synthetic Control
+- Marketing Mix Modeling
+
 ## Highlights
 
 - It covers the full analytics workflow, from instrumentation to dashboards.
@@ -92,7 +99,7 @@ dbt test
 
 ## Tech Stack
 
-Python 3.11+ · dbt Core · BigQuery · SQL · Jupyter · Pandas · NumPy · SciPy · Metabase · Looker Studio
+Python 3.11+ · dbt Core · BigQuery · SQL · Jupyter · Pandas · NumPy · SciPy · statsmodels · scikit-learn · Metabase · Looker Studio
 
 ## Project Design Principles
 
@@ -126,6 +133,7 @@ data-bedrock/
 - Cohort matrix and retention curve fitting helpers
 - Sequential testing and sample size utilities for experiments
 - Causal inference modules for DiD, PSM, bandits, synthetic control, and MMM
+- Dedicated notebooks for DiD, PSM, synthetic control, MMM, and experiment analysis
 - Metabase export with MRR, retention, funnel, and engagement dashboards
 
 ## Best Way To Adapt It

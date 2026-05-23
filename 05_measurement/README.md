@@ -6,19 +6,27 @@ Comprehensive measurement toolkit covering experimental design, causal inference
 
 ```
 05_measurement/
-├── ab_testing/          A/B testing: z-test, t-test, CUPED, mSPRT sequential testing
-├── causal_inference/    Causal methods: DiD, PSM, Bandits, Synthetic Control, MMM
-├── experiment_analysis.ipynb
-├── causal_analysis.ipynb
-└── mmm_analysis.ipynb
+├── ab_testing/                      A/B testing: z-test, t-test, CUPED, mSPRT sequential testing
+├── causal_inference/                Causal methods: DiD, PSM, Bandits, Synthetic Control, MMM
+├── experiment_analysis.ipynb        A/B testing: power analysis, binary/continuous tests, CUPED, sequential
+├── did_analysis.ipynb               DiD: parallel trends, 2×2, panel TWFE, event study, placebo test
+├── psm_analysis.ipynb               PSM: overlap check, Love plot, SMD balance, caliper sensitivity
+├── synthetic_control_analysis.ipynb SC: donor weights, treated vs synthetic, in-space placebo, RMSPE ratio
+└── mmm_analysis.ipynb               MMM: adstock/saturation, revenue decomposition, response curves, budget opt
 ```
 
 ## Quick start
 
 ```bash
 python data/synthetic/generate_synthetic_data.py
+
+# A/B testing
 jupyter notebook 05_measurement/experiment_analysis.ipynb
-jupyter notebook 05_measurement/causal_analysis.ipynb
+
+# Causal inference
+jupyter notebook 05_measurement/did_analysis.ipynb
+jupyter notebook 05_measurement/psm_analysis.ipynb
+jupyter notebook 05_measurement/synthetic_control_analysis.ipynb
 jupyter notebook 05_measurement/mmm_analysis.ipynb
 ```
 
@@ -52,7 +60,8 @@ from ab_testing.sequential import SequentialTest
 from causal_inference.did import DifferenceInDifferences
 
 did = DifferenceInDifferences()
-result = did.estimate_2x2(pre_treated, post_treated, pre_control, post_control)
+# estimate_2x2 takes arrays of raw observations, NOT scalar means
+result = did.estimate_2x2(pre_treated_arr, post_treated_arr, pre_control_arr, post_control_arr)
 print(result)  # ATT with CI and p-value
 
 # Panel DiD (multiple units + time periods)

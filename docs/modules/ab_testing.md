@@ -1,4 +1,4 @@
-# Module Guide: A/B Testing (`05_ab_testing/`)
+# Module Guide: A/B Testing (`05_measurement/ab_testing/`)
 
 ## Overview
 
@@ -27,8 +27,8 @@ Metric type?
 
 ```python
 import sys
-sys.path.insert(0, "05_ab_testing")
-from src import Experiment, required_sample_size
+sys.path.insert(0, "05_measurement")
+from ab_testing import Experiment, required_sample_size
 
 # 1. Plan the experiment
 result = required_sample_size(
@@ -53,7 +53,7 @@ Use `SequentialTest` when you want to peek at results before the planned end dat
 without inflating false positives:
 
 ```python
-from src.sequential import SequentialTest
+from ab_testing.sequential import SequentialTest
 
 test = SequentialTest(alpha=0.05)
 for daily_batch in streaming_data:
@@ -72,7 +72,7 @@ CUPED reduces the noise in your metric by removing variance explained by a
 pre-experiment measurement:
 
 ```python
-from src.stats import cuped
+from ab_testing.stats import cuped
 
 result = cuped(
     control_post=revenue_last_week_control,
@@ -94,3 +94,7 @@ Always report:
 4. Whether the experiment was pre-registered or peeked at early
 
 See `experiment_analysis.ipynb` for a full worked example.
+
+The measurement area also includes separate walkthrough notebooks for
+Difference-in-Differences, Propensity Score Matching, Synthetic Control, and
+Marketing Mix Modeling in `05_measurement/`.
