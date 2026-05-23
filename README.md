@@ -59,6 +59,12 @@ This repository is built for that exact job.
 - Apply causal inference methods when randomized tests are not possible
 - Launch baseline executive and growth dashboards faster
 
+## Example Output
+
+Here is one example of the retention analysis output included in the repo.
+
+![Retention curve example](assets/retention.png)
+
 ## Quick Start
 
 ```bash
