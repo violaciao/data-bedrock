@@ -1,6 +1,6 @@
 # data-bedrock
 
-![data-bedrock](assets/banner.png)
+![data-bedrock](assets/header.png)
 
 Production-ready analytics starter kit for the first data scientist, analytics engineer, or growth lead at a startup.
 
