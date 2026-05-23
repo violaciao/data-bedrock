@@ -136,6 +136,7 @@ If you found this repo while looking for a startup analytics template, these are
 
 ## Related Docs
 
+- [Playbook](docs/playbook.md)
 - [Architecture](docs/architecture.md)
 - [dbt project guide](01_dbt_project/README.md)
 - [Growth analysis guide](03_growth_analysis/README.md)
