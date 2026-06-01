@@ -56,16 +56,6 @@ The measurement module now includes dedicated walkthrough notebooks for:
 - It packages reusable code instead of burying logic only in notebooks.
 - It offers early-stage teams a concrete reference for how modern analytics projects fit together.
 
-## Core Use Cases
-
-- Build a startup analytics repo from scratch in a weekend
-- Stand up dbt models for product events, orders, users, MRR, funnels, and retention
-- Create a shared source of truth for business metrics
-- Run acquisition, conversion, and retention analysis on realistic sample data
-- Evaluate experiments with standard and sequential testing methods
-- Apply causal inference methods when randomized tests are not possible
-- Launch baseline executive and growth dashboards faster
-
 ## Example Output
 
 Here is one example of the retention analysis output included in the repo.
