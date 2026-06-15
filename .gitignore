@@ -79,6 +79,7 @@ ipython_config.py
 
 # Claude
 CLAUDE.md
+AGENTS.md
 
 # macOS
 .DS_Store
