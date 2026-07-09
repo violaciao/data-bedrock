@@ -9,6 +9,7 @@ Comprehensive measurement toolkit covering experimental design, causal inference
 ├── ab_testing/                      A/B testing: z-test, t-test, CUPED, mSPRT sequential testing
 ├── causal_inference/                Causal methods: DiD, PSM, Bandits, Synthetic Control, MMM
 ├── experiment_analysis.ipynb        A/B testing: power analysis, binary/continuous tests, CUPED, sequential
+├── bayesian_experimentation_analysis.ipynb Bayesian testing: Beta-Binomial, decision loss, bootstrap
 ├── did_analysis.ipynb               DiD: parallel trends, 2×2, panel TWFE, event study, placebo test
 ├── psm_analysis.ipynb               PSM: overlap check, Love plot, SMD balance, caliper sensitivity
 ├── synthetic_control_analysis.ipynb SC: donor weights, treated vs synthetic, in-space placebo, RMSPE ratio
@@ -22,6 +23,7 @@ python data/synthetic/generate_synthetic_data.py
 
 # A/B testing
 jupyter notebook 05_measurement/experiment_analysis.ipynb
+jupyter notebook 05_measurement/bayesian_experimentation_analysis.ipynb
 
 # Causal inference
 jupyter notebook 05_measurement/did_analysis.ipynb
